@@ -1,5 +1,5 @@
 import UserSensitiveData from "../constants/SensitiveData.js";
-import { Task, User } from "../models/index.js";
+import { Label, Priority, Project, Task, User } from "../models/index.js";
 
 Task.addScope("withAssociations", {
     include: [
@@ -9,6 +9,9 @@ Task.addScope("withAssociations", {
                 exclude: [...UserSensitiveData],
             },
         },
+        { model: Label },
+        { model: Priority },
+        { model: Project },
     ],
 });
 

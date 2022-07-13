@@ -1,7 +1,7 @@
 import UserSensitiveData from "../constants/SensitiveData.js";
-import { Project, Task, User } from "../models/index.js";
+import { Priority, Task, User } from "../models/index.js";
 
-Project.addScope("withAssociations", {
+Priority.addScope("withAssociations", {
     include: [
         {
             model: User,
@@ -13,4 +13,4 @@ Project.addScope("withAssociations", {
     ],
 });
 
-export default Project;
+export default Priority;

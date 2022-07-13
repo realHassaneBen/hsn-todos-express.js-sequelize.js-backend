@@ -6,10 +6,10 @@ Label.belongsTo(User, {
         allowNull: false,
     },
 });
+
+// belongsToMany
 Label.belongsToMany(Task, {
-    foreignKey: {
-        allowNull: false,
-    },
+    through: "Task_Labels",
 });
 
 export default Label;

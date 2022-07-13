@@ -17,13 +17,12 @@ Task.hasOne(Priority, {
     foreignKey: {
         allowNull: false,
     },
+    through: "Task_Priorities",
 });
 
-// hasMany
-Task.hasMany(Label, {
-    foreignKey: {
-        allowNull: false,
-    },
+// belongsToMany
+Task.belongsToMany(Label, {
+    through: "Task_Labels",
 });
 
 export default Task;

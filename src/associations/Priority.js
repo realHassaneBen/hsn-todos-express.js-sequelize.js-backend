@@ -6,7 +6,7 @@ Priority.belongsTo(User, {
         allowNull: false,
     },
 });
-Priority.belongsToMany(Task, {
+Priority.belongsTo(Task, {
     foreignKey: {
         allowNull: false,
     },
