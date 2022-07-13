@@ -1,9 +1,27 @@
 import { Op } from "sequelize";
+import { getPagination, getPagingData } from "../lib/handlePagination.js";
 import { Task } from "../scopes/index.js";
 
-const findAllTasksQuery = async () => {
-    const tasks = await Task.scope("withAssociations").findAll();
-    return tasks;
+const findAllTasksQuery = async ({ page, size }) => {
+    const { limit, offset } = getPagination(page, size);
+
+    const rows = await Task.scope("withAssociations").findAll({
+        limit,
+        offset,
+    });
+    const count = await Task.count();
+    const { totalItems, totalPages, currentPage } = getPagingData(
+        count,
+        page,
+        limit
+    );
+    return {
+        totalItems,
+        totalPages,
+        currentPage,
+        count,
+        rows,
+    };
 };
 const findAllTasksBySearchQuery = async ({ query }) => {
     const queries = query

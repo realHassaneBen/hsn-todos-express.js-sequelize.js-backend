@@ -1,3 +1,4 @@
+import { getPagination } from "../lib/handlePagination.js";
 import {
     createTaskQuery,
     deleteTaskQuery,
@@ -9,14 +10,17 @@ import {
 import { validateCreateTask, validateUpdateTask } from "../validation/Task.js";
 
 const getTasks = async (request, response) => {
-    const tasks = await findAllTasksQuery();
-    if (tasks) {
-        response.status(200).json({
-            message: `Tasks found`,
-            tasks,
-        });
+    const { page, size } = request.query;
+    const params = {
+        page: parseInt(page),
+        size: parseInt(size),
+    };
+
+    const data = await findAllTasksQuery(params);
+    if (data) {
+        return response.status(200).json(data);
     } else {
-        response.status(404).json({ message: "No tasks found" });
+        return response.status(404).json({ message: "No tasks found" });
     }
 };
 const getTasksBySearch = async (request, response) => {
