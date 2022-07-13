@@ -9,6 +9,7 @@ export const createFakeTasks = async (record) => {
             title: faker.lorem.sentence(),
             description: faker.lorem.paragraph(),
             due_date: faker.date.future(),
+            PriorityId: randomNumber(1, record),
             ProjectId: randomNumber(1, record),
             UserId: randomNumber(1, record),
         });

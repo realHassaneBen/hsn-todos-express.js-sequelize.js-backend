@@ -30,6 +30,7 @@ const findOneTaskQuery = async (where) => {
 
 const createTaskQuery = async (taskData) => {
     const createdTask = await Task.create(taskData);
+    taskData.Labels.map(async (id) => await createdTask.addLabel(id));
     return createdTask;
 };
 

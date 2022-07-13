@@ -67,11 +67,14 @@ const getTaskByName = async (request, response) => {
 const createTask = async (request, response) => {
     const { session, user } = request;
 
-    const { title, description, ProjectId, dueDate } = request.body;
+    const { title, description, ProjectId, dueDate, Labels, PriorityId } =
+        request.body;
     const taskData = {
         title,
         description,
         due_date: new Date(dueDate).toISOString(),
+        Labels: Labels.map((label) => parseInt(label)),
+        PriorityId: parseInt(PriorityId),
         ProjectId: parseInt(ProjectId),
         UserId: user.id,
     };

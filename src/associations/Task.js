@@ -11,14 +11,7 @@ Task.belongsTo(Project, {
         allowNull: false,
     },
 });
-
-// hasOne
-Task.hasOne(Priority, {
-    foreignKey: {
-        allowNull: false,
-    },
-    through: "Task_Priorities",
-});
+Task.belongsTo(Priority, {});
 
 // belongsToMany
 Task.belongsToMany(Label, {
