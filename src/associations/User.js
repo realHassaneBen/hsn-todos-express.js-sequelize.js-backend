@@ -1,4 +1,5 @@
-import { Avatar, Image, Role, User } from "../models/index.js";
+import { Avatar, Image, Project, Role, User } from "../models/index.js";
+import Task from "../models/Task.js";
 
 // hasMany
 User.hasMany(Image, {
@@ -13,6 +14,16 @@ User.hasMany(Avatar, {
     constraints: false,
     scope: {
         avatarableType: "user",
+    },
+});
+User.hasMany(Task, {
+    foreignKey: {
+        allowNull: false,
+    },
+});
+User.hasMany(Project, {
+    foreignKey: {
+        allowNull: false,
     },
 });
 
