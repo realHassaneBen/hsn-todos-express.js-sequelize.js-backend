@@ -7,7 +7,6 @@ const Project = sequelize.define("Project", {
     name: {
         type: STRING,
         allowNull: false,
-        unique: true,
     },
     slug: {
         type: STRING,

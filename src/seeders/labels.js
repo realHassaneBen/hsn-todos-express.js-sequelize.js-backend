@@ -4,7 +4,7 @@ import { randomNumber } from "../utils/index.js";
 
 export const createFakeLabels = async (record) => {
     const fakeLabels = [];
-    for (let index = 0; index < record; index++) {
+    for (let index = 0; index < record * 10; index++) {
         fakeLabels.push({
             name: faker.random.word(),
             TaskId: randomNumber(1, record),

@@ -4,9 +4,10 @@ import { randomNumber } from "../utils/index.js";
 
 export const createFakeProjects = async (record) => {
     const fakeProjects = [];
-    for (let index = 0; index < record; index++) {
+    for (let index = 0; index < record * 10; index++) {
+        const name = faker.random.word();
         fakeProjects.push({
-            name: faker.random.word(),
+            name,
             UserId: randomNumber(1, record),
         });
     }

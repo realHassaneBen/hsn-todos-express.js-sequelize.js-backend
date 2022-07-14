@@ -48,7 +48,12 @@ const findOneTaskQuery = async (where) => {
 
 const createTaskQuery = async (taskData) => {
     const createdTask = await Task.create(taskData);
-    taskData.Labels.map(async (id) => await createdTask.addLabel(id));
+    if (taskData.LabelsIds) {
+        taskData.LabelsIds.map(
+            async (labelId) => await createdTask.addLabel(labelId)
+        );
+    }
+
     return createdTask;
 };
 

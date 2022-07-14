@@ -4,7 +4,7 @@ import { randomNumber } from "../utils/index.js";
 
 export const createFakePriorities = async (record) => {
     const fakePriorities = [];
-    for (let index = 0; index < record; index++) {
+    for (let index = 0; index < record * 10; index++) {
         fakePriorities.push({
             name: faker.random.word(),
             query: faker.lorem.sentence(),

@@ -3,6 +3,7 @@ import passport from "passport";
 import { validateRegister } from "../validation/Auth.js";
 import { registerUserQuery } from "../queries/auth.js";
 import { genPassword } from "../lib/passwordUtils.js";
+import { findByPkUserQuery, findOneUserQuery } from "../queries/users.js";
 
 const login = (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
@@ -72,9 +73,11 @@ const register = async (req, res, next) => {
 };
 
 const profile = async (req, res, next) => {
+    const { session, user } = req;
+    const profile = await findByPkUserQuery(user.id);
     return res.status(200).json({
         isAuthenticated: req.isAuthenticated(),
-        user: req.user,
+        user: profile,
         message: "Profile retrieved successfully",
     });
 };

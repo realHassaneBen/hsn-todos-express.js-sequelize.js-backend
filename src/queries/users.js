@@ -7,8 +7,10 @@ const findAllUsersQuery = async (withoutPassword = true) => {
         : await User.scope(["withAssociations"]).findAll();
 };
 
-const findByPkUserQuery = async (id) => {
-    const user = await User.findByPk(id);
+const findByPkUserQuery = async (id, withoutPassword = true) => {
+    const user = withoutPassword
+        ? await User.scope(["withoutPassword", "withAssociations"]).findByPk(id)
+        : await User.scope(["withAssociations"]).findByPk(id);
     return user;
 };
 

@@ -1,3 +1,3 @@
 export const seedersConfig = {
-    amount: 5,
+    amount: 50,
 };
