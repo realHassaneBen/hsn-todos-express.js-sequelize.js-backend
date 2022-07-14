@@ -1,6 +1,7 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import { passwordMatch } from "../../lib/passwordUtils.js";
 import { User } from "../../models/index.js";
+import { findOneUserQuery } from "../../queries/users.js";
 
 const customFields = {
     usernameField: "email",
@@ -9,11 +10,17 @@ const customFields = {
 
 const verifyCallback = async (email, password, done) => {
     try {
-        const user = await User.findOne({
-            where: {
+        // const user = await User.findOne({
+        //     where: {
+        //         email,
+        //     },
+        // });
+        const user = await findOneUserQuery(
+            {
                 email,
             },
-        });
+            false
+        );
         if (!user) {
             return done(null, false, {
                 message: "Incorrect email or password.",

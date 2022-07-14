@@ -62,10 +62,15 @@ const updateTaskQuery = async (taskData, where) => {
     const updatedTask = await Task.scope("withAssociations").findOne({
         where,
     });
-    updatedTask.categories.map(
-        async (c) => await updatedTask.removeCategory(c.id)
-    );
-    taskData.CategoriesIds.map(async (ci) => await updatedTask.addCategory(ci));
+
+    if (taskData.LabelsIds) {
+        updatedTask.Labels.map(
+            async (label) => await updatedTask.removeLabel(label)
+        );
+        taskData.LabelsIds.map(
+            async (labelId) => await updatedTask.addLabel(labelId)
+        );
+    }
     return updatedTask;
 };
 

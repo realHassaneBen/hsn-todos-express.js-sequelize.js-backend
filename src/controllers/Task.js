@@ -90,10 +90,6 @@ const createTask = async (request, response) => {
             (labelId) => parseInt(labelId)
         );
     }
-    console.log(!isNaN(PriorityId));
-    console.log(!isNaN(ProjectId));
-    console.log({ PriorityId, ProjectId });
-    console.log({ taskData });
     const isTaskValid = validateCreateTask(taskData);
 
     if (!isTaskValid.valid) {
@@ -119,18 +115,26 @@ const updateTask = async (request, response) => {
     const id = parseInt(request.params.id);
     const { session, user } = request;
 
-    const { name, username, about, title, description, CategoriesIds } =
+    const { title, description, ProjectId, dueDate, LabelsIds, PriorityId } =
         request.body;
 
     const taskData = {
-        name,
-        username,
         title,
         description,
-        about,
-        CategoriesIds,
+        due_date: new Date(dueDate).toISOString(),
         UserId: user.id,
     };
+    if (PriorityId && !isNaN(PriorityId)) {
+        taskData.PriorityId = parseInt(PriorityId);
+    }
+    if (ProjectId && !isNaN(ProjectId)) {
+        taskData.ProjectId = parseInt(ProjectId);
+    }
+    if (LabelsIds) {
+        taskData.LabelsIds = LabelsIds.filter((labelId) => !isNaN(labelId)).map(
+            (labelId) => parseInt(labelId)
+        );
+    }
 
     const isTaskValid = validateUpdateTask(taskData);
 
