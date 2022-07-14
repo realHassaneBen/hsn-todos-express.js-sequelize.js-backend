@@ -6,11 +6,7 @@ Task.belongsTo(User, {
         allowNull: false,
     },
 });
-Task.belongsTo(Project, {
-    foreignKey: {
-        allowNull: false,
-    },
-});
+Task.belongsTo(Project, {});
 Task.belongsTo(Priority, {});
 
 // belongsToMany

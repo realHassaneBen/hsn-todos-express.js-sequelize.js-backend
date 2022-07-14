@@ -20,7 +20,22 @@ User.addScope("withoutPassword", {
 });
 
 User.addScope("withAssociations", {
-    include: [Project, Task, Label, Priority, Image, Avatar, Role],
+    include: [
+        Project,
+        {
+            model: Task,
+            include: [
+                { model: Label },
+                { model: Priority },
+                { model: Project },
+            ],
+        },
+        Label,
+        Priority,
+        Image,
+        Avatar,
+        Role,
+    ],
 });
 
 export default User;

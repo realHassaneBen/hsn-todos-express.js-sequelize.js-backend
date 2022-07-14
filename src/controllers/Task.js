@@ -77,11 +77,23 @@ const createTask = async (request, response) => {
         title,
         description,
         due_date: new Date(dueDate).toISOString(),
-        LabelsIds: LabelsIds && LabelsIds.map((labelId) => parseInt(labelId)),
-        PriorityId: parseInt(PriorityId),
-        ProjectId: parseInt(ProjectId),
         UserId: user.id,
     };
+    if (PriorityId && !isNaN(PriorityId)) {
+        taskData.PriorityId = parseInt(PriorityId);
+    }
+    if (ProjectId && !isNaN(ProjectId)) {
+        taskData.ProjectId = parseInt(ProjectId);
+    }
+    if (LabelsIds) {
+        taskData.LabelsIds = LabelsIds.filter((labelId) => !isNaN(labelId)).map(
+            (labelId) => parseInt(labelId)
+        );
+    }
+    console.log(!isNaN(PriorityId));
+    console.log(!isNaN(ProjectId));
+    console.log({ PriorityId, ProjectId });
+    console.log({ taskData });
     const isTaskValid = validateCreateTask(taskData);
 
     if (!isTaskValid.valid) {

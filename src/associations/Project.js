@@ -8,10 +8,6 @@ Project.belongsTo(User, {
 });
 
 // hasMany
-Project.hasMany(Task, {
-    foreignKey: {
-        allowNull: false,
-    },
-});
+Project.hasMany(Task, {});
 
 export default Project;

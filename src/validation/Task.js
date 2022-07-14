@@ -15,7 +15,7 @@ const CreateTaskSchema = {
         ProjectId: { type: "number" },
         UserId: { type: "number" },
     },
-    required: ["title", "description", "ProjectId", "UserId"],
+    required: ["title", "description", "UserId"],
     additionalProperties: false,
 };
 
@@ -30,7 +30,7 @@ const UpdateTaskSchema = {
         ProjectId: { type: "number" },
         UserId: { type: "number" },
     },
-    required: ["title", "description", "ProjectId", "UserId"],
+    required: ["title", "description", "UserId"],
     additionalProperties: false,
 };
 
