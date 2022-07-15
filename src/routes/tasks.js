@@ -6,6 +6,7 @@ import {
     getTaskByName,
     getTasks,
     getTasksBySearch,
+    getTasksByUserId,
     updateTask,
 } from "../controllers/Task.js";
 import { isAuth } from "../middleware/Auth.js";
@@ -17,6 +18,7 @@ router.get("/", getTasks);
 router.get("/:id", getTaskById);
 router.get("/q/:query", getTasksBySearch);
 router.get("/name/:slug", getTaskByName);
+router.get("/UserId/:id", getTasksByUserId);
 router.post("/", isAuth, createTask);
 router.put("/:id", isAuth, isTaskOwner, updateTask);
 router.delete("/:id", isAuth, isTaskOwner, deleteTask);

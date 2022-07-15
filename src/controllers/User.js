@@ -14,7 +14,10 @@ import {
 } from "../validation/User.js";
 
 const getUsers = async (request, response) => {
-    const users = await findAllUsersQuery(true);
+    const users = await findAllUsersQuery([
+        "withoutPassword",
+        "withAssociations",
+    ]);
     if (users) {
         response.status(200).json({ users });
     } else {
@@ -24,7 +27,7 @@ const getUsers = async (request, response) => {
 
 const getUserById = async (request, response) => {
     const id = parseInt(request.params.id);
-    const user = await findOneUserQuery({ id });
+    const user = await findOneUserQuery({ id }, ["withAssociations"]);
     if (user) {
         response.status(200).json({ user });
     } else {
@@ -34,7 +37,7 @@ const getUserById = async (request, response) => {
 
 const getUserByUsername = async (request, response) => {
     const username = request.params.username;
-    const user = await findOneUserQuery({ username });
+    const user = await findOneUserQuery({ username }, ["withAssociations"]);
     if (user) {
         response.status(200).json({ user });
     } else {
@@ -46,7 +49,7 @@ const getUserByUsername = async (request, response) => {
 
 const getUserByEmail = async (request, response) => {
     const email = parseInt(request.params.email);
-    const user = await findOneUserQuery({ email });
+    const user = await findOneUserQuery({ email }, ["withAssociations"]);
     if (user) {
         response.status(200).json({ user });
     } else {
@@ -183,7 +186,7 @@ const updateUserPassword = async (request, response) => {
         });
     }
 
-    const currentUser = await findOneUserQuery({ id }, false);
+    const currentUser = await findOneUserQuery({ id }, ["withAssociations"]);
     if (!currentUser) {
         return response.status(404).json({
             message: `User not found with ID: ${id}`,

@@ -74,7 +74,13 @@ const register = async (req, res, next) => {
 
 const profile = async (req, res, next) => {
     const { session, user } = req;
-    const profile = await findByPkUserQuery(user.id);
+    const profile = await findByPkUserQuery(user.id, [
+        "withoutPassword",
+        "withAssociations",
+    ]);
+    delete user.dataValues.passwordHash;
+    delete user.dataValues.passwordSalt;
+
     return res.status(200).json({
         isAuthenticated: req.isAuthenticated(),
         user: profile,

@@ -2,10 +2,10 @@ import { Op } from "sequelize";
 import { getPagination, getPagingData } from "../lib/handlePagination.js";
 import { Task } from "../scopes/index.js";
 
-const findAllTasksQuery = async ({ page, size }) => {
+export const findAllTasksQuery = async ({ page, size }, scope) => {
     const { limit, offset } = getPagination(page, size);
 
-    const rows = await Task.scope("withAssociations").findAll({
+    const rows = await Task.scope(scope).findAll({
         limit,
         offset,
     });
@@ -23,7 +23,29 @@ const findAllTasksQuery = async ({ page, size }) => {
         rows,
     };
 };
-const findAllTasksBySearchQuery = async ({ query }) => {
+export const findAllTasksWhereQuery = async ({ page, size }, scope, where) => {
+    const { limit, offset } = getPagination(page, size);
+
+    const rows = await Task.scope(scope).findAll({
+        limit,
+        offset,
+        where,
+    });
+    const count = await Task.count();
+    const { totalItems, totalPages, currentPage } = getPagingData(
+        count,
+        page,
+        limit
+    );
+    return {
+        totalItems,
+        totalPages,
+        currentPage,
+        count,
+        rows,
+    };
+};
+export const findAllTasksBySearchQuery = async ({ query }) => {
     const queries = query
         .trim()
         .split(" ")
@@ -37,16 +59,15 @@ const findAllTasksBySearchQuery = async ({ query }) => {
     });
     return task;
 };
-const findByPkTaskQuery = async (id) => {
+export const findByPkTaskQuery = async (id) => {
     const task = await Task.scope("withAssociations").findByPk(id);
     return task;
 };
-const findOneTaskQuery = async (where) => {
+export const findOneTaskQuery = async (where) => {
     const task = await Task.scope("withAssociations").findOne({ where });
     return task;
 };
-
-const createTaskQuery = async (taskData) => {
+export const createTaskQuery = async (taskData) => {
     const createdTask = await Task.create(taskData);
     if (taskData.LabelsIds) {
         taskData.LabelsIds.map(
@@ -56,37 +77,33 @@ const createTaskQuery = async (taskData) => {
 
     return createdTask;
 };
-
-const updateTaskQuery = async (taskData, where) => {
+export const updateTaskQuery = async (taskData, where) => {
     await Task.update(taskData, { where });
     const updatedTask = await Task.scope("withAssociations").findOne({
         where,
     });
 
     if (taskData.LabelsIds) {
-        updatedTask.Labels.map(
-            async (label) => await updatedTask.removeLabel(label)
-        );
-        taskData.LabelsIds.map(
-            async (labelId) => await updatedTask.addLabel(labelId)
-        );
+        for (let index = 0; index < updatedTask.Labels.length; index++) {
+            const element = updatedTask.Labels[index];
+            await updatedTask.removeLabel(element.id);
+        }
+        for (let index = 0; index < taskData.LabelsIds.length; index++) {
+            const element = taskData.LabelsIds[index];
+            await updatedTask.addLabel(element);
+        }
+        // taskData.LabelsIds.map(
+        //     async (labelId) => await updatedTask.addLabel(labelId)
+        // );
+        // updatedTask.Labels.map(
+        //     async (label) => await updatedTask.removeLabel(label.id)
+        // );
     }
     return updatedTask;
 };
-
-const deleteTaskQuery = async (where) => {
+export const deleteTaskQuery = async (where) => {
     const deletedTask = await Task.destroy({
         where,
     });
     return deletedTask;
-};
-
-export {
-    findAllTasksQuery,
-    findAllTasksBySearchQuery,
-    findByPkTaskQuery,
-    findOneTaskQuery,
-    createTaskQuery,
-    updateTaskQuery,
-    deleteTaskQuery,
 };

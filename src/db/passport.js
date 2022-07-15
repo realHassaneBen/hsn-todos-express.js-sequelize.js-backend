@@ -8,7 +8,11 @@ passport.use(localStrategy);
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (userId, done) => {
     try {
-        const user = await findByPkUserQuery(userId);
+        // const user = await User.findByPk(userId);
+        const user = await findByPkUserQuery(userId, [
+            "withoutPassword",
+            "withAssociations",
+        ]);
         done(null, user);
     } catch (error) {
         done(error);

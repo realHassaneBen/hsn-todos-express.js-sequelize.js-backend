@@ -49,7 +49,9 @@ const isUsernameTaken = async (req, res, next) => {
         return res.status(400).json({ message: "Username is required" });
     }
 
-    const isUsernameTaken = await findOneUserQuery({ username });
+    const isUsernameTaken = await findOneUserQuery({ username }, [
+        "withAssociations",
+    ]);
     if (isUsernameTaken) {
         return res.status(401).json({
             message: `Username ${username} is already taken`,
@@ -70,7 +72,9 @@ const isUsernameTaken = async (req, res, next) => {
 const isEmailExist = async (req, res, next) => {
     const { email } = req.body;
 
-    const isEmailExist = await findOneUserQuery({ email });
+    const isEmailExist = await findOneUserQuery({ email }, [
+        "withAssociations",
+    ]);
     if (isEmailExist) {
         return res.status(401).json({
             message: `User with email ${email} already exist`,

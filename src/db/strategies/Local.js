@@ -19,7 +19,7 @@ const verifyCallback = async (email, password, done) => {
             {
                 email,
             },
-            false
+            ["withAssociations"]
         );
         if (!user) {
             return done(null, false, {

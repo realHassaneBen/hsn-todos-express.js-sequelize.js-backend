@@ -1,25 +1,16 @@
 import UserSensitiveData from "../constants/SensitiveData.js";
 import { User } from "../scopes/index.js";
 
-const findAllUsersQuery = async (withoutPassword = true) => {
-    return withoutPassword
-        ? await User.scope(["withoutPassword", "withAssociations"]).findAll()
-        : await User.scope(["withAssociations"]).findAll();
+const findAllUsersQuery = async (scope) => {
+    return await User.scope(scope).findAll();
 };
 
-const findByPkUserQuery = async (id, withoutPassword = true) => {
-    const user = withoutPassword
-        ? await User.scope(["withoutPassword", "withAssociations"]).findByPk(id)
-        : await User.scope(["withAssociations"]).findByPk(id);
-    return user;
+const findByPkUserQuery = async (id, scope) => {
+    return await User.scope(scope).findByPk(id);
 };
 
-const findOneUserQuery = async (where, withoutPassword = true) => {
-    return withoutPassword
-        ? await User.scope(["withoutPassword", "withAssociations"]).findOne({
-              where,
-          })
-        : await User.scope(["withAssociations"]).findOne({ where });
+const findOneUserQuery = async (where, scope) => {
+    return await User.scope(scope).findOne({ where });
 };
 
 const createUserQuery = async (user) => {
