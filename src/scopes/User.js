@@ -19,57 +19,6 @@ User.addScope("withoutPassword", {
     },
 });
 
-User.addScope("withAssociationsx", {
-    include: [
-        // Task,
-        {
-            model: Project,
-            attributes: ["id", "name"],
-            separate: true, // <--- Run separate query
-            limit: 5,
-        },
-        {
-            model: Task,
-            attributes: ["id", "title", "slug", "description", "due_date"],
-            include: [
-                {
-                    model: Label,
-                    attributes: ["id", "name"],
-                },
-                {
-                    model: Priority,
-                    attributes: ["id", "name"],
-                },
-                {
-                    model: Project,
-                    attributes: ["id", "name"],
-                },
-            ],
-        },
-        {
-            model: Label,
-            limit: 5,
-            attributes: ["id", "name"],
-        },
-        {
-            model: Priority,
-            limit: 5,
-            attributes: ["id", "name"],
-        },
-        {
-            model: Image,
-            limit: 5,
-            attributes: ["id", "url"],
-        },
-        {
-            model: Avatar,
-            limit: 5,
-            attributes: ["id", "url"],
-        },
-        { model: Role },
-    ],
-});
-
 User.addScope("withAssociations", {
     include: [
         // Task,
