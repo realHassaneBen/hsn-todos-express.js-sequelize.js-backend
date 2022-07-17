@@ -10,11 +10,6 @@ const customFields = {
 
 const verifyCallback = async (email, password, done) => {
     try {
-        // const user = await User.findOne({
-        //     where: {
-        //         email,
-        //     },
-        // });
         const user = await findOneUserQuery(
             {
                 email,
