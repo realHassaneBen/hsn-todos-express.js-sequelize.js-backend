@@ -4,8 +4,10 @@ import Avatar from "./Avatar.js";
 import Role from "./Role.js";
 import Permission from "./Permission.js";
 import Resource from "./Resource.js";
-import Task from "./Task.js";
+
 import Project from "./Project.js";
+import Task from "./Task.js";
+import Comment from "./Comment.js";
 
 import Label from "./Label.js";
 import Priority from "./Priority.js";
@@ -19,6 +21,7 @@ export {
     Resource,
     Task,
     Project,
+    Comment,
     Label,
     Priority,
 };

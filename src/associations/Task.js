@@ -1,4 +1,14 @@
-import { Label, Priority, Project, Task, User } from "../models/index.js";
+import {
+    Label,
+    Priority,
+    Project,
+    Task,
+    User,
+    Comment,
+} from "../models/index.js";
+
+// hasMany
+Task.hasMany(Comment);
 
 // belongsTo
 Task.belongsTo(User, {

@@ -9,6 +9,7 @@ import {
     Label,
     Project,
     Task,
+    Comment,
 } from "../models/index.js";
 
 import {} from "./index.js";
@@ -58,6 +59,7 @@ User.addScope("withAssociations", {
             separate: true,
         },
         { model: Role },
+        { model: Comment },
     ],
 });
 

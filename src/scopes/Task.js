@@ -1,5 +1,12 @@
 import UserSensitiveData from "../constants/SensitiveData.js";
-import { Label, Priority, Project, Task, User } from "../models/index.js";
+import {
+    Comment,
+    Label,
+    Priority,
+    Project,
+    Task,
+    User,
+} from "../models/index.js";
 
 Task.addScope("withAssociations", {
     include: [
@@ -12,6 +19,7 @@ Task.addScope("withAssociations", {
         { model: Label },
         { model: Priority },
         { model: Project },
+        { model: Comment },
     ],
 });
 

@@ -7,6 +7,7 @@ import { createFakeTasks } from "./tasks.js";
 import { createFakeProjects } from "./projects.js";
 import { createFakeLabels } from "./labels.js";
 import { createFakePriorities } from "./priorities.js";
+import { createFakeComments } from "./comments.js";
 
 const RECORD = seedersConfig.amount;
 
@@ -28,6 +29,7 @@ const dbSeedFake = async () => {
     await createFakePriorities(RECORD);
     await createFakeProjects(RECORD);
     await createFakeTasks(RECORD);
+    await createFakeComments(RECORD);
     await createFakeLabels(RECORD);
 
     // await createFakeStudents(RECORD);

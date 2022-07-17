@@ -6,8 +6,9 @@ import {
     Project,
     Role,
     User,
+    Comment,
+    Task,
 } from "../models/index.js";
-import Task from "../models/Task.js";
 
 // hasMany
 User.hasMany(Image, {
@@ -30,6 +31,11 @@ User.hasMany(Task, {
     },
 });
 User.hasMany(Project, {
+    foreignKey: {
+        allowNull: false,
+    },
+});
+User.hasMany(Comment, {
     foreignKey: {
         allowNull: false,
     },
