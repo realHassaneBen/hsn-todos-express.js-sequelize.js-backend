@@ -3,6 +3,7 @@ import {
     deleteCommentQuery,
     findAllCommentsBySearchQuery,
     findAllCommentsQuery,
+    findAllCommentsWhereQuery,
     findOneCommentQuery,
     updateCommentQuery,
 } from "../queries/comments.js";
@@ -11,7 +12,7 @@ import {
     validateUpdateComment,
 } from "../validation/Comment.js";
 
-const getComments = async (request, response) => {
+export const getComments = async (request, response) => {
     const { page, size } = request.query;
     const params = {
         page: parseInt(page),
@@ -26,8 +27,53 @@ const getComments = async (request, response) => {
         return response.status(404).json({ message: "No Comments found" });
     }
 };
-const getCommentsBySearch = async (request, response) => {
+export const getCommentsByUserId = async (request, response) => {
+    const UserId = parseInt(request.params.id);
+    if (isNaN(UserId)) {
+        return response.status(400).json({ message: "Invalid UserId" });
+    }
+    const { page, size } = request.query;
+    const params = {
+        page: parseInt(page),
+        size: parseInt(size),
+    };
+
+    const data = await findAllCommentsWhereQuery(params, ["withAssociations"], {
+        UserId,
+    });
+
+    if (data) {
+        return response.status(200).json(data);
+    } else {
+        return response.status(404).json({ message: "No Comments found" });
+    }
+};
+export const getCommentsByTaskId = async (request, response) => {
+    const TaskId = parseInt(request.params.id);
+    if (isNaN(TaskId)) {
+        return response.status(400).json({ message: "Invalid TaskId" });
+    }
+    const { page, size } = request.query;
+    const params = {
+        page: parseInt(page),
+        size: parseInt(size),
+    };
+
+    const data = await findAllCommentsWhereQuery(params, ["withAssociations"], {
+        TaskId,
+    });
+
+    if (data) {
+        return response.status(200).json(data);
+    } else {
+        return response.status(404).json({ message: "No Comments found" });
+    }
+};
+export const getCommentsBySearch = async (request, response) => {
     const query = request.params.query;
+    if (!query) {
+        return response.status(400).json({ message: "Invalid Query" });
+    }
 
     const comments = await findAllCommentsBySearchQuery({ query });
     if (comments) {
@@ -42,8 +88,11 @@ const getCommentsBySearch = async (request, response) => {
             .json({ message: `Comment not found with Query: ${query}` });
     }
 };
-const getCommentById = async (request, response) => {
+export const getCommentById = async (request, response) => {
     const id = parseInt(request.params.id);
+    if (isNaN(id)) {
+        return response.status(400).json({ message: "Invalid ID" });
+    }
     const comment = await findOneCommentQuery({ id });
     if (comment) {
         return response.status(200).json({
@@ -56,7 +105,7 @@ const getCommentById = async (request, response) => {
         });
     }
 };
-const getCommentByName = async (request, response) => {
+export const getCommentByName = async (request, response) => {
     const slug = request.params.slug;
     const comment = await findOneCommentQuery({ slug });
     if (comment) {
@@ -70,8 +119,7 @@ const getCommentByName = async (request, response) => {
         });
     }
 };
-
-const createComment = async (request, response) => {
+export const createComment = async (request, response) => {
     const { session, user } = request;
 
     const { content, TaskId } = request.body;
@@ -103,8 +151,7 @@ const createComment = async (request, response) => {
             .json({ message: `Faile to create a comment` });
     }
 };
-
-const updateComment = async (request, response) => {
+export const updateComment = async (request, response) => {
     const id = parseInt(request.params.id);
     const { session, user } = request;
 
@@ -136,21 +183,10 @@ const updateComment = async (request, response) => {
         });
     }
 };
-
-const deleteComment = async (request, response) => {
+export const deleteComment = async (request, response) => {
     const id = parseInt(request.params.id);
     await deleteCommentQuery({ id });
     return response
         .status(200)
         .json({ message: `Comment deleted with ID: ${id}` });
-};
-
-export {
-    getComments,
-    getCommentById,
-    getCommentsBySearch,
-    getCommentByName,
-    createComment,
-    updateComment,
-    deleteComment,
 };

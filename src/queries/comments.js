@@ -23,6 +23,32 @@ export const findAllCommentsQuery = async ({ page, size }, scope) => {
         rows,
     };
 };
+export const findAllCommentsWhereQuery = async (
+    { page, size },
+    scope,
+    where
+) => {
+    const { limit, offset } = getPagination(page, size);
+
+    const rows = await Comment.scope(scope).findAll({
+        limit,
+        offset,
+        where,
+    });
+    const count = await Comment.count();
+    const { totalItems, totalPages, currentPage } = getPagingData(
+        count,
+        page,
+        limit
+    );
+    return {
+        totalItems,
+        totalPages,
+        currentPage,
+        count,
+        rows,
+    };
+};
 export const findAllCommentsBySearchQuery = async ({ query }) => {
     const queries = query
         .trim()

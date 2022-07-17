@@ -69,6 +69,7 @@ export const getTaskByName = async (request, response) => {
     }
 };
 export const getTasksByUserId = async (request, response) => {
+    const UserId = parseInt(request.params.id);
     const { page, size } = request.query;
     const params = {
         page: parseInt(page),
@@ -76,7 +77,7 @@ export const getTasksByUserId = async (request, response) => {
     };
 
     const data = await findAllTasksWhereQuery(params, ["withAssociations"], {
-        UserId: 1,
+        UserId,
     });
     if (data) {
         return response.status(200).json(data);
@@ -84,6 +85,7 @@ export const getTasksByUserId = async (request, response) => {
         return response.status(404).json({ message: "No tasks found" });
     }
 };
+
 export const createTask = async (request, response) => {
     const { session, user } = request;
 
