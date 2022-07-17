@@ -8,7 +8,7 @@ export const createFakeComments = async (record) => {
         const name = faker.random.word();
         fakeComments.push({
             content: faker.lorem.paragraph(),
-            TaskId: randomNumber(1, record),
+            TaskId: randomNumber(1, record * 10),
             UserId: randomNumber(1, record),
         });
     }
