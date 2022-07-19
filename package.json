@@ -1,6 +1,6 @@
 {
     "name": "hsn-todos-express.js-sequelize.js-backend",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "hsn todos list with express.js and sequelize, backend",
     "main": "src/index.js",
     "author": "Hassane Bendaoud <40140987+realHassaneBen@users.noreply.github.com>",
