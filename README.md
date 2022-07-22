@@ -9,9 +9,9 @@ I'm a full stack developer...
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/hsn0x)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/hsn0x)
 
-# HSN Todos Express.js Sequelize.js Backend
+# Todos Express.js Sequelize.js Backend
 
-Todos List Backend API with Express.js and Sequelize.js
+Todos Backend API with Express.js and Sequelize.js
 
 ## Authors
 
@@ -122,8 +122,8 @@ To run this project, you will need to add the following environment variables to
 
 Here are some related projects
 
--   [HSN Marketplace Next.js Frontend](https://github.com/hsn0x/hsn-marketplace-nextjs-frontend)
--   [HSN Marketplace Express.js Sequelize.js Backend](https://github.com/hsn0x/hsn-marketplace-expressjs-sequelize-backend.git)
+-   [Marketplace Next.js Frontend](https://github.com/hsn0x/hsn-marketplace-nextjs-frontend)
+-   [Marketplace Express.js Sequelize.js Backend](https://github.com/hsn0x/hsn-marketplace-expressjs-sequelize-backend.git)
 
 ## Roadmap
 
