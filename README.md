@@ -7,7 +7,7 @@ I'm a full stack developer...
 ## 🔗 Links
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/hsn0x)
-[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/hsn0x)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/hsn_0x)
 
 # Todos Express.js Sequelize.js Backend
 
@@ -34,7 +34,7 @@ on progress
 Clone the project
 
 ```bash
-  git clone https://github.com/hsn0x/hsn-todos-express.js-sequelize.js-backend.git
+  git clone https://github.com/hsn0x/todos-express.js-sequelize.js-backend.git
 ```
 
 Go to the project directory
@@ -122,8 +122,8 @@ To run this project, you will need to add the following environment variables to
 
 Here are some related projects
 
--   [Marketplace Next.js Frontend](https://github.com/hsn0x/hsn-marketplace-nextjs-frontend)
--   [Marketplace Express.js Sequelize.js Backend](https://github.com/hsn0x/hsn-marketplace-expressjs-sequelize-backend.git)
+-   [Marketplace Next.js Frontend](https://github.com/hsn0x/marketplace-nextjs-frontend)
+-   [Marketplace Express.js Sequelize.js Backend](https://github.com/hsn0x/marketplace-expressjs-sequelize-backend.git)
 
 ## Roadmap
 
@@ -133,11 +133,11 @@ Here are some related projects
 
 ## Support
 
-For support, twitter [@hsn0x](https://twitter.com/hsn0x)
+For support, twitter [@hsn0x](https://twitter.com/hsn_0x)
 
 ## Feedback
 
-If you have any feedback, please reach out to us at [@hsn0x](https://twitter.com/hsn0x)
+If you have any feedback, please reach out to us at [@hsn0x](https://twitter.com/hsn_0x)
 
 ## License
 

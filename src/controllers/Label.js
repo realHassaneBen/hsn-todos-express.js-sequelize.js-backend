@@ -11,7 +11,7 @@ import {
     validateUpdateLabel,
 } from "../validation/Label.js";
 
-const getLabels = async (request, response) => {
+export const getLabels = async (request, response) => {
     const labels = await findAllLabelsQuery();
     if (labels) {
         response.status(200).json({
@@ -22,7 +22,7 @@ const getLabels = async (request, response) => {
         response.status(404).json({ message: "No labels found" });
     }
 };
-const getLabelsBySearch = async (request, response) => {
+export const getLabelsBySearch = async (request, response) => {
     const query = request.params.query;
 
     const labels = await findAllLabelsBySearchQuery({ query });
@@ -38,7 +38,7 @@ const getLabelsBySearch = async (request, response) => {
             .json({ message: `Label not found with Query: ${query}` });
     }
 };
-const getLabelById = async (request, response) => {
+export const getLabelById = async (request, response) => {
     const id = parseInt(request.params.id);
     const label = await findOneLabelQuery({ id });
     if (label) {
@@ -52,7 +52,7 @@ const getLabelById = async (request, response) => {
         });
     }
 };
-const getLabelByName = async (request, response) => {
+export const getLabelByName = async (request, response) => {
     const slug = request.params.slug;
     const label = await findOneLabelQuery({ slug });
     if (label) {
@@ -66,8 +66,7 @@ const getLabelByName = async (request, response) => {
         });
     }
 };
-
-const createLabel = async (request, response) => {
+export const createLabel = async (request, response) => {
     const { session, user } = request;
 
     const { name, TaskId } = request.body;
@@ -98,8 +97,7 @@ const createLabel = async (request, response) => {
             .json({ message: `Faile to create a label` });
     }
 };
-
-const updateLabel = async (request, response) => {
+export const updateLabel = async (request, response) => {
     const id = parseInt(request.params.id);
     const { session, user } = request;
 
@@ -135,19 +133,8 @@ const updateLabel = async (request, response) => {
         });
     }
 };
-
-const deleteLabel = async (request, response) => {
+export const deleteLabel = async (request, response) => {
     const id = parseInt(request.params.id);
     await deleteLabelQuery({ id });
     response.status(200).json({ message: `Label deleted with ID: ${id}` });
-};
-
-export {
-    getLabels,
-    getLabelById,
-    getLabelsBySearch,
-    getLabelByName,
-    createLabel,
-    updateLabel,
-    deleteLabel,
 };

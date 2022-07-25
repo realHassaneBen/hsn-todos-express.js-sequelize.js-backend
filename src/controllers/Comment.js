@@ -171,7 +171,6 @@ export const updateComment = async (request, response) => {
     }
 
     const updatedComment = await updateCommentQuery(commentData, { id });
-
     if (updatedComment) {
         return response.status(200).json({
             message: `Comment updated with ID: ${updatedComment[0]?.id}`,
