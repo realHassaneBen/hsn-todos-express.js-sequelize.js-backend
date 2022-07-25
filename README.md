@@ -34,7 +34,7 @@ on progress
 Clone the project
 
 ```bash
-  git clone https://github.com/hsn0x/todos-express.js-sequelize.js-backend.git
+  git clone https://github.com/hsn0x/todos-express-sequelize-backend.git
 ```
 
 Go to the project directory

@@ -1,14 +1,14 @@
 {
-    "name": "todos-express.js-sequelize.js-backend",
+    "name": "todos-express-sequelize-backend",
     "version": "1.0.2",
-    "description": "todos list with express.js and sequelize, backend",
+    "description": "todos list with express and sequelize, backend",
     "main": "src/index.js",
     "author": "Hassane Bendaoud <40140987+hsn0x@users.noreply.github.com>",
     "license": "MIT",
     "type": "module",
     "private": true,
     "repository": {
-        "url": "https://github.com/hsn0x/todos-express.js-sequelize.js-backend.git",
+        "url": "https://github.com/hsn0x/todos-express-sequelize-backend.git",
         "type": "git",
         "directory": "."
     },
